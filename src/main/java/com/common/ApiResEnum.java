@@ -1,4 +1,4 @@
-package com.user.common;
+package com.common;
 
 public enum ApiResEnum {
 	success(200),
@@ -9,7 +9,7 @@ public enum ApiResEnum {
 	
 	
 	
-	
+
 	
 	
 	

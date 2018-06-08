@@ -1,4 +1,4 @@
-package com.user.common;
+package com.common;
 
 public class ApiResponse<T> {
 	private int code;
@@ -16,6 +16,7 @@ public class ApiResponse<T> {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
+	
 	public T getData() {
 		return data;
 	}
