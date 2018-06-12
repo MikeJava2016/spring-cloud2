@@ -3,15 +3,14 @@ package com.user.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.common.ApiResponse;
 import com.github.pagehelper.PageHelper;
-import com.user.common.ApiResponse;
 import com.user.entity.User;
 import com.user.service.UserService;
 
@@ -24,6 +23,7 @@ public class UserController {
 	//url :http://localhost:8080/user/
 	// 处理"/users/"的GET请求，用来获取用户列表
 	// 还可以通过@RequestParam从页面中传递参数来进行查询条件或者翻页信息的传递
+	//produces可以定制返回的response的媒体类型和字符集
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
 	public ApiResponse<?> listUser() {
 		// PageHelper.startPage(1, 1);
@@ -53,7 +53,7 @@ public class UserController {
 		User u = userService.get(user.getId());
 		u.setUserName(user.getUserName());
 		u.setAge(user.getAge());
-		userService.update(u.getId(), u);
+		userService.update(u.getId(), u);·
 		return ApiResponse.successResponse();
 	}*/
 
@@ -63,5 +63,5 @@ public class UserController {
 		userService.remove(id);
 		return ApiResponse.successResponse();
 	}
-
+	
 }
