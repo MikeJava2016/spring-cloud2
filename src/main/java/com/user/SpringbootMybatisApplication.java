@@ -39,8 +39,12 @@ public class SpringbootMybatisApplication  {
 		return xssJsonConvert;
 	}
 	
-	@Bean
-	 public EmbeddedServletContainerFactory servletContainer() {
+	/**
+	 * 禁止使用https
+	 * @return
+	 */
+	//@Bean
+	public EmbeddedServletContainerFactory servletContainer() {
 	   TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory() {
 	     @Override
 	     protected void postProcessContext(Context context) {
@@ -55,6 +59,8 @@ public class SpringbootMybatisApplication  {
 	   tomcat.addAdditionalTomcatConnectors(initiateHttpConnector());
 	   return tomcat;
 	 }
+	 
+	 
 	 private Connector initiateHttpConnector() {
 	   Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
 	   connector.setScheme("http");

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.user.dao.StudentCourseMapper">
+	<resultMap id="BaseResultMap"
+		type="com.user.entity.StudentCourse">
+		<id column="s_id" jdbcType="INTEGER" property="sId" />
+		<id column="c_id" jdbcType="INTEGER" property="cId" />
+	</resultMap>
+	<resultMap id="CourseMap" type="com.user.entity.Course">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="cname" jdbcType="VARCHAR" property="cname" />
+	</resultMap>
+
+	<!-- 注意结果集的映射关系 这是一个关联查询 -->
+	<select id="getCourseByStudentId" parameterType="int"
+		resultMap="CourseMap">
+		select c.*,st.s_id from tb_student_course st left join tb_course c on
+		st.c_id = c.id where st.s_id = #{sId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="com.user.entity.StudentCourse">
+		delete from tb_student_course
+		where s_id = #{sId,jdbcType=INTEGER}
+		and c_id = #{cId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert"
+		parameterType="com.user.entity.StudentCourse">
+		insert into tb_student_course (s_id, c_id)
+		values (#{sId,jdbcType=INTEGER}, #{cId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.user.entity.StudentCourse">
+		insert into tb_student_course
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sId != null">
+				s_id,
+			</if>
+			<if test="cId != null">
+				c_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sId != null">
+				#{sId,jdbcType=INTEGER},
+			</if>
+			<if test="cId != null">
+				#{cId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>
