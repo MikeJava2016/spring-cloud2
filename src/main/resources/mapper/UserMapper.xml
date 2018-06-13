@@ -7,14 +7,17 @@
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
   </resultMap>
+  
+   <resultMap id="ResultMap" type="com.user.entity.User" extends = "BaseResultMap">
+    <collection property="orders" ofType="com.user.entity.Order" column="id"
+    	select="com.user.dao.OrderMapper.selectByUserId"/>
+  </resultMap>
   <sql id="Base_Column_List">
     id, age, user_name, password
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from tb_wx_user
-    where id = #{id,jdbcType=INTEGER}
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMap">
+  	select u.id, u.age, u.user_name, u.password
+  		from tb_wx_user u where u.id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteById" parameterType="java.lang.Integer">
     delete from tb_wx_user

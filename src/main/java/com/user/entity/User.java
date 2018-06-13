@@ -1,5 +1,7 @@
 package com.user.entity;
 
+import java.util.List;
+
 public class User {
     private Integer id;
 
@@ -8,6 +10,8 @@ public class User {
     private String userName;
 
     private String password;
+    
+    private List<Order> orders;
 
     public Integer getId() {
         return id;
@@ -44,4 +48,14 @@ public class User {
         this.password = password == null ? null : password.trim();
         return this;
     }
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+    
+    
 }
