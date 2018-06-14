@@ -41,6 +41,7 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.winter.model
+  type-handlers-package: com.user.utils
 pagehelper:
   helperDialect: mysql
   reasonable: true
