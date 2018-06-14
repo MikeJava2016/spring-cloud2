@@ -1,11 +1,15 @@
 package com.user.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.common.ApiResponse;
+import com.common.util.PropertiesUtil;
 import com.github.pagehelper.PageHelper;
 import com.user.entity.Order;
 import com.user.entity.OrderDetail;
@@ -31,6 +35,13 @@ public class DemoCotroller {
 	@RequestMapping("/get/orderdetail/{id}")
 	public ApiResponse<?> getOrdertail(@PathVariable int id) {
 		OrderDetail orderDetail = orderDetailService.selectByPrimaryKey(id);
+		System.out.println(PropertiesUtil.getValue("name"));
+		try {
+			System.out.println(PropertiesUtil.getValue("a.properties", "name"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return ApiResponse.successResponse(orderDetail);
 		
 	}
