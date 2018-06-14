@@ -2,6 +2,8 @@ package com.user.entity;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Items {
 	
     private Integer id;
@@ -12,6 +14,7 @@ public class Items {
 
     private String pic;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:ss:mm",timezone="GMT+8")
     private Date createtime;
 
     private String detail;

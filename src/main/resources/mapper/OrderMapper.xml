@@ -8,6 +8,11 @@
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="note" jdbcType="VARCHAR" property="note" />
   </resultMap>
+  
+  <resultMap id="ResultMap" type="com.user.entity.Order" extends="BaseResultMap">
+   	<collection property="orderDetails" column="id" 
+   			select="com.user.dao.OrderDetailMapper.selectByOrderId"></collection>
+  </resultMap>
   <sql id="Base_Column_List">
     id, user_id, number, createtime, note
   </sql>
@@ -18,7 +23,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   
-  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="ResultMap">
     select 
     <include refid="Base_Column_List" />
     from tb_orders

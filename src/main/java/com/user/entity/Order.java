@@ -1,17 +1,24 @@
 package com.user.entity;
 
 import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Order {
+	
     private Integer id;
 
     private Integer userId;
 
     private String number;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:ss:mm",timezone="GMT+8")
     private Date createtime;
 
     private String note;
+    
+    private List<OrderDetail> orderDetails;
 
     public Integer getId() {
         return id;
@@ -52,4 +59,14 @@ public class Order {
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
     }
+
+	public List<OrderDetail> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(List<OrderDetail> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+    
+    
 }

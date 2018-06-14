@@ -12,6 +12,7 @@ import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletCon
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,7 +20,7 @@ import com.user.convert.XssJsonConvert;
 @SpringBootApplication
 @MapperScan(value ="com.user.dao")
 @EnableAsync
-
+@EnableScheduling
 public class SpringbootMybatisApplication  {
 
 	public static void main(String[] args) {

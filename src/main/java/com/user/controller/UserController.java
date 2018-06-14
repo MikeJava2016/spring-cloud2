@@ -26,7 +26,7 @@ public class UserController {
 	//produces可以定制返回的response的媒体类型和字符集
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
 	public ApiResponse<?> listUser() {
-		// PageHelper.startPage(1, 1);
+		PageHelper.startPage(1, 1);
 		List<User> user = userService.listUser();
 		return ApiResponse.successResponse(user);
 	}

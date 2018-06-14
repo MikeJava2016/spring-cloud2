@@ -5,7 +5,8 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="age" jdbcType="VARCHAR" property="age" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="password" jdbcType="VARCHAR" property="password" 
+    typeHandler="com.user.utils.StringTypeHandler"/>
   </resultMap>
   
    <resultMap id="ResultMap" type="com.user.entity.User" extends = "BaseResultMap">

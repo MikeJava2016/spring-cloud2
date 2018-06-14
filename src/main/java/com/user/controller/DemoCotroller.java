@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.common.ApiResponse;
+import com.github.pagehelper.PageHelper;
 import com.user.entity.Order;
 import com.user.entity.OrderDetail;
 import com.user.service.OrderDetailService;
@@ -40,6 +41,7 @@ public class DemoCotroller {
 	 */
 	@RequestMapping("/get/user/{userid}")
 	public ApiResponse<?> getUser(@PathVariable int userid) {
+		 PageHelper.startPage(1, 1);
 		 return ApiResponse.successResponse(userService.selectByPrimaryKey(userid));
 	}
 }

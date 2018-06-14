@@ -8,9 +8,21 @@
     <result column="items_num" jdbcType="INTEGER" property="itemsNum" />
     <association property="items" column="items_id" select="com.user.dao.ItemsMapper.selectByPrimaryKey"></association>
   </resultMap>
+  
+  <resultMap id="ResultMap" type="com.user.entity.OrderDetail" extends="BaseResultMap">
+    <association property="items" column="items_id" select="com.user.dao.ItemsMapper.selectByPrimaryKey"></association>
+  </resultMap>
   <sql id="Base_Column_List">
     id, orders_id, items_id, items_num
   </sql>
+  
+   <select id="selectByOrderId" parameterType="java.lang.Integer" resultMap="ResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_orderdetail
+    where orders_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
