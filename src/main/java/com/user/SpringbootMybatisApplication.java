@@ -20,7 +20,7 @@ import com.user.convert.XssJsonConvert;
 @SpringBootApplication
 @MapperScan(value ="com.user.dao")
 @EnableAsync
-@EnableScheduling
+//@EnableScheduling
 public class SpringbootMybatisApplication  {
 
 	public static void main(String[] args) {

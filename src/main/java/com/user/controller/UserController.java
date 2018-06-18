@@ -2,6 +2,8 @@ package com.user.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,8 +37,23 @@ public class UserController {
 	// 除了@ModelAttribute绑定参数之外，还可以通过@RequestParam从页面中传递参数
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public ApiResponse<?> postUser(@RequestBody User user) {
-		userService.put(user.getId(), user);
-		return ApiResponse.successResponse();
+		 userService.put(user.getId(), user);
+		 ApiResponse<?> apiResponse = ApiResponse.successResponse();
+		 apiResponse.setReason("处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User处理\"/users/\"的POST请求，用来创建User");
+		 return apiResponse;
+	}
+	
+	@RequestMapping(value = "/parameter", method = RequestMethod.POST)
+	public ApiResponse<?> postUser(HttpServletRequest request) {
+		
+		 User user = new User();
+		 user.setId(Integer.parseInt(request.getParameter("id")));
+		 user.setAge(request.getParameter("age"));
+		 user.setPassword(request.getParameter("password"));
+		 user.setUserName(request.getParameter("userName"));
+		 userService.put(user .getId(), user);
+		 ApiResponse<?> apiResponse = ApiResponse.successResponse();
+		 return apiResponse;
 	}
 
 	// 处理"/users/{id}"的GET请求，用来获取url中id值的User信息
