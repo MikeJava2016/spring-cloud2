@@ -1,20 +1,20 @@
 #server:
   #port: 8443
   #ssl:
-   #key-store: classpath:keystore.p12
-   #key-store-password: 123456
-   #key-store-type: PKCS12
-   #key-alias: tomcat
+  #key-store: classpath:keystore.p12
+  # key-store-password: 123456
+  # key-store-type: PKCS12
+  # key-alias: tomcat
 spring:
   session:
     store-type: none
   datasource:
     data: test
-    url: jdbc:mysql://localhost:3306/springmvc
-    username: root
+    url: jdbc:postgresql://localhost:6432/spring-cloude2
+    username: postgres
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: org.postgresql.Driver
     filters: stat
     maxActive: 20
     initialSize: 1
@@ -37,11 +37,22 @@ spring:
     expose-session-attributes: true
     request-context-attribute: true
     suffix: .html
-    
+  redis:  
+    database:  0  
+    host:  127.0.0.1  
+    port:  6379  
+    password: 123456  
+    pool:  
+      max-active: 8  
+      max-wait: -1  
+      max-idle: 8  
+      min-idle: 0  
+      timeout: 0  
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.winter.model
   type-handlers-package: com.user.utils
+
 pagehelper:
   helperDialect: mysql
   reasonable: true
@@ -57,5 +68,4 @@ logging:
 project:
   timeInterceptor: true
 debug: true
-  
     

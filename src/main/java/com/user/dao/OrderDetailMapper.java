@@ -6,7 +6,7 @@ import com.user.entity.OrderDetail;
 
 public interface OrderDetailMapper {
 
-	int deleteByPrimaryKey(Integer id);
+	int deleteByPrimaryKey(String id);
 
 	int insert(OrderDetail record);
 
@@ -18,11 +18,11 @@ public interface OrderDetailMapper {
 	 * @param id
 	 * @return
 	 */
-	OrderDetail selectByPrimaryKey(Integer id);
+	OrderDetail selectByPrimaryKey(String id);
 
 	int updateByPrimaryKeySelective(OrderDetail record);
 
 	int updateByPrimaryKey(OrderDetail record);
 
-	List<OrderDetail> selectByOrderId(Integer orderId);
+	List<OrderDetail> selectByOrderId(String orderId);
 }

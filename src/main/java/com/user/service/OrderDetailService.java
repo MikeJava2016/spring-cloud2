@@ -4,6 +4,6 @@ import com.user.entity.OrderDetail;
 
 public interface OrderDetailService {
 	
-	 OrderDetail selectByPrimaryKey(Integer id);
+	 OrderDetail selectByPrimaryKey(String id);
 	 
 }

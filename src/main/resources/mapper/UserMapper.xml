@@ -2,11 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.user.dao.UserMapper">
   <resultMap id="BaseResultMap" type="com.user.entity.User">
-    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="age" jdbcType="VARCHAR" property="age" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="password" jdbcType="VARCHAR" property="password" 
-    typeHandler="com.user.utils.StringTypeHandler"/>
+    <result column="password" jdbcType="VARCHAR" property="password"/>
   </resultMap>
   
    <resultMap id="ResultMap" type="com.user.entity.User" extends = "BaseResultMap">
@@ -16,22 +15,22 @@
   <sql id="Base_Column_List">
     id, age, user_name, password
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMap">
   	select u.id, u.age, u.user_name, u.password
-  		from tb_wx_user u where u.id = #{id,jdbcType=INTEGER}
+  		from tb_user u where u.id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteById" parameterType="java.lang.Integer">
-    delete from tb_wx_user
-    where id = #{id,jdbcType=INTEGER}
+  <delete id="deleteById" parameterType="java.lang.String">
+    delete from tb_user
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.user.entity.User">
-    insert into tb_wx_user (id, age, user_name, 
+    insert into tb_user (id, age, user_name, 
       password)
-    values (#{id,jdbcType=INTEGER}, #{age,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR})
   </insert>
   <insert id="put" parameterType="com.user.entity.User">
-    insert into tb_wx_user
+    insert into tb_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -48,7 +47,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="age != null">
         #{age,jdbcType=VARCHAR},
@@ -62,7 +61,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.user.entity.User">
-    update tb_wx_user
+    update tb_user
     <set>
       <if test="age != null">
         age = #{age,jdbcType=VARCHAR},
@@ -74,20 +73,20 @@
         password = #{password,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateById" parameterType="com.user.entity.User">
-    update tb_wx_user
+    update tb_user
     set age = #{age,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   
    <select id="select" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tb_wx_user
+    from tb_user
   </select>
   
 </mapper>

@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.user.dao.OrderMapper">
   <resultMap id="BaseResultMap" type="com.user.entity.Order">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="number" jdbcType="VARCHAR" property="number" />
-    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="order_number" jdbcType="VARCHAR" property="orderNumber" />
+    <result column="createtime" jdbcType="DATE" property="createtime" />
     <result column="note" jdbcType="VARCHAR" property="note" />
   </resultMap>
   
@@ -14,29 +14,29 @@
    			select="com.user.dao.OrderDetailMapper.selectByOrderId"></collection>
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, number, createtime, note
+    id, user_id, order_number, createtime, note
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tb_orders
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </select>
   
-  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="ResultMap">
+  <select id="selectByUserId" parameterType="java.lang.String" resultMap="ResultMap">
     select 
     <include refid="Base_Column_List" />
     from tb_orders
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from tb_orders
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.user.entity.Order">
-    insert into tb_orders (id, user_id, number, 
+    insert into tb_orders (id, user_id, orderNumber, 
       createtime, note)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{orderNumber,jdbcType=VARCHAR}, 
       #{createtime,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.user.entity.Order">
@@ -48,8 +48,8 @@
       <if test="userId != null">
         user_id,
       </if>
-      <if test="number != null">
-        number,
+      <if test="orderNumber != null">
+        orderNumber,
       </if>
       <if test="createtime != null">
         createtime,
@@ -60,13 +60,13 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="number != null">
-        #{number,jdbcType=VARCHAR},
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null">
         #{createtime,jdbcType=TIMESTAMP},
@@ -80,10 +80,10 @@
     update tb_orders
     <set>
       <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
+        user_id = #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="number != null">
-        number = #{number,jdbcType=VARCHAR},
+      <if test="orderNumber != null">
+        orderNumber = #{orderNumber,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null">
         createtime = #{createtime,jdbcType=TIMESTAMP},
@@ -92,14 +92,14 @@
         note = #{note,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.user.entity.Order">
     update tb_orders
-    set user_id = #{userId,jdbcType=INTEGER},
-      number = #{number,jdbcType=VARCHAR},
+    set user_id = #{userId,jdbcType=VARCHAR},
+      orderNumber = #{orderNumber,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       note = #{note,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

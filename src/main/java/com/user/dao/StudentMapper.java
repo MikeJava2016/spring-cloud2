@@ -3,13 +3,13 @@ package com.user.dao;
 import com.user.entity.Student;
 
 public interface StudentMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     int insert(Student record);
 
     int insertSelective(Student record);
 
-    Student selectByPrimaryKey(Integer id);
+    Student selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(Student record);
 

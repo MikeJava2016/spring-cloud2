@@ -47,7 +47,7 @@ public class UserController {
 	public ApiResponse<?> postUser(HttpServletRequest request) {
 		
 		 User user = new User();
-		 user.setId(Integer.parseInt(request.getParameter("id")));
+		 user.setId(request.getParameter("id"));
 		 user.setAge(request.getParameter("age"));
 		 user.setPassword(request.getParameter("password"));
 		 user.setUserName(request.getParameter("userName"));
@@ -59,7 +59,7 @@ public class UserController {
 	// 处理"/users/{id}"的GET请求，用来获取url中id值的User信息
 	// url中的id可通过@PathVariable绑定到函数的参数中
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ApiResponse<?> getUser(@PathVariable int id) {
+	public ApiResponse<?> getUser(@PathVariable String id) {
 		User user = userService.get(id);
 		return ApiResponse.successResponse(user);
 	}
@@ -76,7 +76,7 @@ public class UserController {
 
 	// 处理"/users/{id}"的DELETE请求，用来删除User
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ApiResponse<?> deleteUser(@PathVariable int id) {
+	public ApiResponse<?> deleteUser(@PathVariable String id) {
 		userService.remove(id);
 		return ApiResponse.successResponse();
 	}

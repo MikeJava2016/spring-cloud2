@@ -10,6 +10,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -36,6 +37,7 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
+import org.junit.Test;
 
 /**  HttpClient 是 Apache Jakarta Common 下的子项目，可以用来提供高效的、最新的、功能丰富的支持 HTTP </br>
     * 		协议的客户端编程工具包，并且它支持 HTTP 协议最新的版本和建议。</br>
@@ -53,56 +55,7 @@ import org.apache.http.util.EntityUtils;
 	*	(7)释放连接。无论执行方法是否成功，都必须释放连接</br>
 	*/
 public class SimpleHttpClientDemo {
-	 /**
-     * 模拟请求
-     * 
-     * @param url        资源地址
-     * @param map    参数列表
-     * @param encoding    编码
-     * @return
-     * @throws ParseException
-     * @throws IOException
-     */
-    public static String send(String url, Map<String,String> map,String encoding) 
-    		throws ParseException, IOException{
-        String body = "";
-
-        //创建httpclient对象
-        CloseableHttpClient client = HttpClients.createDefault();
-        //创建post方式请求对象
-        HttpPost httpPost = new HttpPost(url);
-        
-        //装填参数
-        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-        if(map!=null){
-            for (Entry<String, String> entry : map.entrySet()) {
-                nvps.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
-            }
-        }
-        //设置参数到请求对象中
-        httpPost.setEntity(new UrlEncodedFormEntity(nvps, encoding));
-
-        System.out.println("请求地址："+url);
-        System.out.println("请求参数："+nvps.toString());
-        
-        //设置header信息
-        //指定报文头【Content-type】、【User-Agent】
-        httpPost.setHeader("Content-type", "application/x-www-form-urlencoded");
-        httpPost.setHeader("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
-        
-        //执行请求操作，并拿到结果（同步阻塞）
-        CloseableHttpResponse response = client.execute(httpPost);
-        //获取结果实体
-        HttpEntity entity = response.getEntity();
-        if (entity != null) {
-            //按指定编码转换结果实体为String类型
-            body = EntityUtils.toString(entity, encoding);
-        }
-        EntityUtils.consume(entity);
-        //释放链接
-        response.close();
-        return body;
-    }
+	 
     
     /**
      * 模拟请求
@@ -187,7 +140,7 @@ public class SimpleHttpClientDemo {
         
         //tomcat是我自己的密钥库的密码，你可以替换成自己的
         //如果密码为空，则用"nopassword"代替
-        SSLContext sslcontext = custom("D:\\keys\\wsriakey", "tomcat");
+        SSLContext sslcontext = custom("C:\\Users\\hu\\Desktop\\keystore.p12", "tomcat");
         
         // 设置协议http和https对应的处理socket链接工厂的对象
         Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder.<ConnectionSocketFactory>create()
@@ -282,6 +235,7 @@ public class SimpleHttpClientDemo {
         KeyStore trustStore = null;
         try {
             trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+          //  trustStore.set
             instream = new FileInputStream(new File(keyStorePath));
             trustStore.load(instream, keyStorepass.toCharArray());
             // 相信自己的CA和所有自签名的证书
@@ -296,4 +250,20 @@ public class SimpleHttpClientDemo {
         }
         return sc;
     }
+    
+    @Test
+    public void send() throws ParseException, IOException {
+    	String url = "https://localhost:8443/user/parameter";
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("id", "6");
+		params.put("age", "12");
+		params.put("userName", "sendPost");
+		params.put("password", "password");
+    	 String string = send3( url,  params,"UTF-8") ;
+    	 System.out.println(string);
+    	
+    	
+	}
+    
+  
 }

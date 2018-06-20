@@ -11,7 +11,7 @@ public interface StudentCourseMapper {
 
     int insertSelective(StudentCourse record);
     
-    List<StudentCourse> getCourseByStudentId(int studentId);
+    List<StudentCourse> getCourseByStudentId(String studentId);
     
     //List<StudentCourse> getCourseByCourseId(int courseId);
 }

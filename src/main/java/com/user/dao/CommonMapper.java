@@ -11,5 +11,5 @@ public interface CommonMapper<T> {
 	
 	int updateById(T t);
 	
-	int deleteById(int id);
+	int deleteById(String id);
 }

@@ -33,7 +33,7 @@ public class DemoCotroller {
 	 * @return
 	 */
 	@RequestMapping("/get/orderdetail/{id}")
-	public ApiResponse<?> getOrdertail(@PathVariable int id) {
+	public ApiResponse<?> getOrdertail(@PathVariable String id) {
 		OrderDetail orderDetail = orderDetailService.selectByPrimaryKey(id);
 		System.out.println(PropertiesUtil.getValue("name"));
 		try {
@@ -51,7 +51,7 @@ public class DemoCotroller {
 	 * @return
 	 */
 	@RequestMapping("/get/user/{userid}")
-	public ApiResponse<?> getUser(@PathVariable int userid) {
+	public ApiResponse<?> getUser(@PathVariable String userid) {
 		 PageHelper.startPage(1, 1);
 		 return ApiResponse.successResponse(userService.selectByPrimaryKey(userid));
 	}

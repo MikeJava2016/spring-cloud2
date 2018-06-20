@@ -14,7 +14,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	@Autowired private OrderDetailMapper orderDetailMapper;
 
 	@Override
-	public OrderDetail selectByPrimaryKey(Integer id) {
+	public OrderDetail selectByPrimaryKey(String id) {
 		return orderDetailMapper.selectByPrimaryKey(id);
 	}
 

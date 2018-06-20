@@ -1,23 +1,23 @@
 package com.user.entity;
 
 public class StudentCourse {
-    private int sId;
+    private String sId;
 
-    private int cId;
+    private String cId;
     
-    public int getsId() {
+    public String getsId() {
         return sId;
     }
 
-    public void setsId(int sId) {
+    public void setsId(String sId) {
         this.sId = sId ;
     }
 
-    public int getcId() {
+    public String getcId() {
         return cId;
     }
 
-    public void setcId(int cId) {
+    public void setcId(String cId) {
         this.cId = cId ;
     }
 }

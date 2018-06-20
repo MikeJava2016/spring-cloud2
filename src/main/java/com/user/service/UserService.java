@@ -3,19 +3,18 @@ package com.user.service;
 import java.util.List;
 
 import com.user.entity.User;
-
 public interface UserService {
 
 	List<User> listUser();
 
-	void put(Integer id, User user);
+	User put(String id, User user);
 
-	void remove(int id);
+	void remove(String id);
 
-	User get(int id);
+	User get(String id);
 
-	void update(Integer id, User u);
+	User update(String id, User u);
 
-	User selectByPrimaryKey(int userid);
+	User selectByPrimaryKey(String userid);
 
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.user.dao.StudentMapper">
 	<resultMap id="BaseResultMap" type="com.user.entity.Student">
-		<id column="id" jdbcType="INTEGER" property="id" />
+		<id column="id" jdbcType="VARCHAR" property="id" />
 		<result column="name" jdbcType="VARCHAR" property="name" />
 	</resultMap>
 
@@ -19,21 +19,21 @@
 
 	<!-- 注意查询的结果集的映射关系 -->
 	<select id="selectByPrimaryKey"
-		parameterType="java.lang.Integer" resultMap="StudentResult">
+		parameterType="java.lang.String" resultMap="StudentResult">
 		select
 		<include refid="Base_Column_List" />
 		from tb_student
-		where id = #{id,jdbcType=INTEGER}
+		where id = #{id,jdbcType=VARCHAR}
 	</select>
 
 	<delete id="deleteByPrimaryKey"
-		parameterType="java.lang.Integer">
+		parameterType="java.lang.String">
 		delete from tb_student
-		where id = #{id,jdbcType=INTEGER}
+		where id = #{id,jdbcType=VARCHAR}
 	</delete>
 	<insert id="insert" parameterType="com.user.entity.Student">
 		insert into tb_student (id, name)
-		values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
+		values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective"
 		parameterType="com.user.entity.Student">
@@ -48,7 +48,7 @@
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="id != null">
-				#{id,jdbcType=INTEGER},
+				#{id,jdbcType=VARCHAR},
 			</if>
 			<if test="name != null">
 				#{name,jdbcType=VARCHAR},
@@ -63,12 +63,12 @@
 				name = #{name,jdbcType=VARCHAR},
 			</if>
 		</set>
-		where id = #{id,jdbcType=INTEGER}
+		where id = #{id,jdbcType=VARCHAR}
 	</update>
 	<update id="updateByPrimaryKey"
 		parameterType="com.user.entity.Student">
 		update tb_student
 		set name = #{name,jdbcType=VARCHAR}
-		where id = #{id,jdbcType=INTEGER}
+		where id = #{id,jdbcType=VARCHAR}
 	</update>
 </mapper>

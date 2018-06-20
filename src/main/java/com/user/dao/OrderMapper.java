@@ -5,17 +5,17 @@ import java.util.List;
 import com.user.entity.Order;
 
 public interface OrderMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     int insert(Order record);
 
     int insertSelective(Order record);
 
-    Order selectByPrimaryKey(Integer id);
+    Order selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
     
-    List<Order> selectByUserId(int userId);
+    List<Order> selectByUserId(String userId);
 }

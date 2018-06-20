@@ -23,7 +23,7 @@ public class StudentCotroller {
 	 * @return
 	 */
 	@RequestMapping("/get/{sid}")
-	public ApiResponse<?> get(@PathVariable int sid) {
+	public ApiResponse<?> get(@PathVariable String sid) {
 		Student student = studentService.selectByPrimaryKey(sid);
 		return ApiResponse.successResponse(student);
 	}

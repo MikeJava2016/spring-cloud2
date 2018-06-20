@@ -1,144 +1,141 @@
-/*
-Navicat MySQL Data Transfer
+ create sequence tb_course_id_seq increment by 1 minvalue 1 no maxvalue start with 4;  
 
-Source Server         : windows_mysql
-Source Server Version : 50549
-Source Host           : localhost:3306
-Source Database       : springmvc
+create sequence tb_items_id_seq increment by 1 minvalue 1 no maxvalue start with 4;  
+create sequence tb_orderdetail_id_seq increment by 1 minvalue 1 no maxvalue start with 5;  
+create sequence tb_orders_id_seq increment by 1 minvalue 1 no maxvalue start with 2;  
+create sequence tb_student_id_seq increment by 1 minvalue 1 no maxvalue start with 3;    
+create sequence tb_user_id_seq increment by 1 minvalue 1 no maxvalue start with 13;  
 
-Target Server Type    : MYSQL
-Target Server Version : 50549
-File Encoding         : 65001
+-- Table: public.tb_course
 
-Date: 2018-06-13 22:33:08
-*/
+-- DROP TABLE public.tb_course;
 
-SET FOREIGN_KEY_CHECKS=0;
+CREATE TABLE public.tb_course
+(
+  id character varying(20) NOT NULL,
+  cname character varying(20),
+  CONSTRAINT tb_course_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.tb_course
+  OWNER TO postgres;
+COMMENT ON TABLE public.tb_course
+  IS '课程表';
 
--- ----------------------------
--- Table structure for `tb_course`
--- ----------------------------
-DROP TABLE IF EXISTS `tb_course`;
-CREATE TABLE `tb_course` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `cname` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '课程名称',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+-- Table: public.tb_items
 
--- ----------------------------
--- Records of tb_course
--- ----------------------------
-INSERT INTO `tb_course` VALUES ('1', '语文');
-INSERT INTO `tb_course` VALUES ('2', '数学');
-INSERT INTO `tb_course` VALUES ('3', '英语');
+-- DROP TABLE public.tb_items;
 
--- ----------------------------
--- Table structure for `tb_items`
--- ----------------------------
-DROP TABLE IF EXISTS `tb_items`;
-CREATE TABLE `tb_items` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(32) NOT NULL COMMENT '商品名称',
-  `price` float(10,1) NOT NULL COMMENT '商品定价',
-  `detail` text COMMENT '商品描述',
-  `pic` varchar(64) DEFAULT NULL COMMENT '商品图片',
-  `createtime` datetime NOT NULL COMMENT '生产日期',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+CREATE TABLE public.tb_items
+(
+  id character varying(11) NOT NULL,
+  name character varying(32) NOT NULL,
+  price double precision NOT NULL,
+  detail text,
+  pic character varying(64),
+  createtime date,
+  CONSTRAINT tb_items_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.tb_items
+  OWNER TO postgres;
+COMMENT ON TABLE public.tb_items
+  IS '商品';
 
--- ----------------------------
--- Records of tb_items
--- ----------------------------
-INSERT INTO `tb_items` VALUES ('1', '铅笔', '2.0', '一种用来书写以及绘画素描专用的笔类', 'pen.jpg', '2018-06-13 20:18:38');
-INSERT INTO `tb_items` VALUES ('2', '钢笔', '10.0', '钢笔是人们普遍使用的书写工具，发明于19世纪初。笔头由金属制成，书写起来圆滑而有弹性，相当流畅。在笔套口处或笔尖表面，均有明显的商标牌号、型号。还分为蘸水式钢笔和自来水式钢笔、墨囊钢笔。', 'gangbi.jpg', '2018-06-13 20:20:13');
-INSERT INTO `tb_items` VALUES ('3', '小刀', '2.0', '普通的铅笔刀一般是有三部分构成：刀片，刀鞘以及废料盒。', 'qianbidao.jpg', '2018-06-13 20:21:09');
+-- Table: public.tb_orderdetail
 
--- ----------------------------
--- Table structure for `tb_orderdetail`
--- ----------------------------
-DROP TABLE IF EXISTS `tb_orderdetail`;
-CREATE TABLE `tb_orderdetail` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `orders_id` int(11) NOT NULL COMMENT '订单id',
-  `items_id` int(11) NOT NULL COMMENT '商品id',
-  `items_num` int(11) DEFAULT NULL COMMENT '商品购买数量',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+-- DROP TABLE public.tb_orderdetail;
 
--- ----------------------------
--- Records of tb_orderdetail
--- ----------------------------
-INSERT INTO `tb_orderdetail` VALUES ('1', '1', '1', '1');
-INSERT INTO `tb_orderdetail` VALUES ('2', '1', '2', '9');
-INSERT INTO `tb_orderdetail` VALUES ('3', '2', '1', '5');
-INSERT INTO `tb_orderdetail` VALUES ('4', '2', '2', '5');
+CREATE TABLE public.tb_orderdetail
+(
+  id character varying(10) NOT NULL,
+  orders_id character varying(11) NOT NULL,
+  items_id character varying(11) NOT NULL,
+  items_num bigint,
+  CONSTRAINT tb_orderdetail_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.tb_orderdetail
+  OWNER TO postgres;
+COMMENT ON TABLE public.tb_orderdetail
+  IS '订单明细表';
 
--- ----------------------------
--- Table structure for `tb_orders`
--- ----------------------------
-DROP TABLE IF EXISTS `tb_orders`;
-CREATE TABLE `tb_orders` (
-  `user_id` int(11) NOT NULL COMMENT '下单用户id',
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `number` varchar(32) NOT NULL COMMENT '订单号',
-  `createtime` datetime NOT NULL COMMENT '创建订单时间',
-  `note` varchar(100) DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of tb_orders
--- ----------------------------
-INSERT INTO `tb_orders` VALUES ('1', '1', '1', '2018-06-13 20:21:59', null);
-INSERT INTO `tb_orders` VALUES ('1', '2', '2', '2018-06-13 21:06:47', null);
+CREATE TABLE public.tb_orders
+(
+  user_id character varying(11) NOT NULL,
+  id character varying(11) NOT NULL,
+  order_number character varying(20) NOT NULL,
+  createtime date,
+  note character varying(100),
+  CONSTRAINT tb_orders_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.tb_orders
+  OWNER TO postgres;
+COMMENT ON TABLE public.tb_orders
+  IS '订单表';
 
--- ----------------------------
--- Table structure for `tb_student`
--- ----------------------------
-DROP TABLE IF EXISTS `tb_student`;
-CREATE TABLE `tb_student` (
-  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '姓名',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+-- Table: public.tb_student
 
--- ----------------------------
--- Records of tb_student
--- ----------------------------
-INSERT INTO `tb_student` VALUES ('1', '阿斯顿发生');
-INSERT INTO `tb_student` VALUES ('2', '撒的发生');
+-- DROP TABLE public.tb_student;
 
--- ----------------------------
--- Table structure for `tb_student_course`
--- ----------------------------
-DROP TABLE IF EXISTS `tb_student_course`;
-CREATE TABLE `tb_student_course` (
-  `s_id` int(255) unsigned NOT NULL DEFAULT '0',
-  `c_id` int(255) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`s_id`,`c_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE public.tb_student
+(
+  id character varying(11) NOT NULL,
+  name character varying(50) NOT NULL,
+  CONSTRAINT tb_student_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.tb_student
+  OWNER TO postgres;
+COMMENT ON TABLE public.tb_student
+  IS '学生表';
 
--- ----------------------------
--- Records of tb_student_course
--- ----------------------------
-INSERT INTO `tb_student_course` VALUES ('1', '1');
-INSERT INTO `tb_student_course` VALUES ('1', '2');
-INSERT INTO `tb_student_course` VALUES ('2', '1');
-INSERT INTO `tb_student_course` VALUES ('2', '3');
+-- Table: public.tb_student_course
 
--- ----------------------------
--- Table structure for `tb_wx_user`
--- ----------------------------
-DROP TABLE IF EXISTS `tb_wx_user`;
-CREATE TABLE `tb_wx_user` (
-  `user_name` varchar(100) DEFAULT NULL,
-  `age` varchar(10) DEFAULT NULL,
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `password` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+-- DROP TABLE public.tb_student_course;
 
--- ----------------------------
--- Records of tb_wx_user
--- ----------------------------
-INSERT INTO `tb_wx_user` VALUES ('java', '123', '1', '123456');
+CREATE TABLE public.tb_student_course
+(
+  s_id character varying(11) NOT NULL,
+  c_id character varying(11) NOT NULL,
+  CONSTRAINT tb_student_course_pk PRIMARY KEY (s_id, c_id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.tb_student_course
+  OWNER TO postgres;
+COMMENT ON TABLE public.tb_student_course
+  IS '学生课程表';
+
+-- Table: public.tb_user
+
+-- DROP TABLE public.tb_user;
+
+CREATE TABLE public.tb_user
+(
+  id character varying(11) NOT NULL,
+  user_name character varying(50) NOT NULL,
+  age bigint NOT NULL,
+  password character varying(50) NOT NULL,
+  CONSTRAINT tb_user_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.tb_user
+  OWNER TO postgres;
+COMMENT ON TABLE public.tb_user
+  IS '用户表';

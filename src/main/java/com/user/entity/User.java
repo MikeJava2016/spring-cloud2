@@ -3,7 +3,7 @@ package com.user.entity;
 import java.util.List;
 
 public class User {
-    private Integer id;
+    private String id;
 
     private String age;
 
@@ -13,11 +13,11 @@ public class User {
     
     private List<Order> orders;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public User setId(Integer id) {
+    public User setId(String id) {
         this.id = id;
         return this;
     }

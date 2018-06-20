@@ -1,11 +1,11 @@
 package com.user.entity;
 
 public class OrderDetail {
-    private Integer id;
+    private String id;
 
-    private Integer ordersId;
+    private String ordersId;
 
-    private Integer itemsId;
+    private String itemsId;
 
     private Integer itemsNum;
     /**
@@ -13,31 +13,32 @@ public class OrderDetail {
      */
     private Items items;
 
-    public Integer getId() {
-        return id;
-    }
+    
+    public String getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public Integer getOrdersId() {
-        return ordersId;
-    }
+	public String getOrdersId() {
+		return ordersId;
+	}
 
-    public void setOrdersId(Integer ordersId) {
-        this.ordersId = ordersId;
-    }
+	public void setOrdersId(String ordersId) {
+		this.ordersId = ordersId;
+	}
 
-    public Integer getItemsId() {
-        return itemsId;
-    }
+	public String getItemsId() {
+		return itemsId;
+	}
 
-    public void setItemsId(Integer itemsId) {
-        this.itemsId = itemsId;
-    }
+	public void setItemsId(String itemsId) {
+		this.itemsId = itemsId;
+	}
 
-    public Integer getItemsNum() {
+	public Integer getItemsNum() {
         return itemsNum;
     }
 
