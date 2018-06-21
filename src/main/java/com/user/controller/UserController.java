@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.common.ApiResponse;
+import com.common.util.BaseController;
 import com.github.pagehelper.PageHelper;
 import com.user.entity.User;
 import com.user.service.UserService;
 
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController{
 	
 	@Autowired
 	private UserService userService;
@@ -70,9 +71,16 @@ public class UserController {
 		User u = userService.get(user.getId());
 		u.setUserName(user.getUserName());
 		u.setAge(user.getAge());
-		userService.update(u.getId(), u);·
+		userService.update(u.getId(), u);
 		return ApiResponse.successResponse();
 	}*/
+	
+	// 处理"/users/{id}"的PUT请求，用来更新User信息
+		@RequestMapping(value = "/putUser", method = RequestMethod.PUT)
+		public ApiResponse<?> putUser( @RequestBody User user) {
+			user =userService.update(user);
+			return ApiResponse.successResponse(user);
+		}
 
 	// 处理"/users/{id}"的DELETE请求，用来删除User
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

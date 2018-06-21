@@ -22,6 +22,9 @@ public interface UserMapper extends CommonMapper<User>{
 
     int updateByPrimaryKey(User record);
     
+    @Update("update tb_user set user_name = #{userName} where id=#{id} ")
+	int update(User u);
+    
    /* @Insert("insert sys_user(id,user_name) values(#{id},#{userName})")
 	void insert(User u);
 	

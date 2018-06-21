@@ -16,5 +16,7 @@ public interface UserService {
 	User update(String id, User u);
 
 	User selectByPrimaryKey(String userid);
+	
+	public User update(User u);
 
 }

@@ -5,13 +5,13 @@ import com.user.entity.Student;
 public interface StudentMapper {
     int deleteByPrimaryKey(String id);
 
-    int insert(Student record);
+    int insert(Student student);
 
-    int insertSelective(Student record);
+    int insertSelective(Student student);
 
     Student selectByPrimaryKey(String id);
 
-    int updateByPrimaryKeySelective(Student record);
+    int updateByPrimaryKeySelective(Student student);
 
-    int updateByPrimaryKey(Student record);
+    int updateByPrimaryKey(Student student);
 }

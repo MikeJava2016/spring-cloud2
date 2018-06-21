@@ -31,9 +31,12 @@
 		delete from tb_student
 		where id = #{id,jdbcType=VARCHAR}
 	</delete>
-	<insert id="insert" parameterType="com.user.entity.Student">
+	<insert id="insert" parameterType="com.user.entity.Student" useGeneratedKeys="true" keyProperty="id">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.lang.String">
+		SELECT nextval('tb_student_id_seq')
+		</selectKey>
 		insert into tb_student (id, name)
-		values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
+			values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective"
 		parameterType="com.user.entity.Student">

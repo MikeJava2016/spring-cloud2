@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * redis mybatis 耳机缓存
+ * redis mybatis redis缓存
  * @author hu
  *
  */
@@ -53,7 +53,7 @@ public class RedisCacheConfiguration extends CachingConfigurerSupport{
 	    public CacheManager cacheManager(RedisTemplate redisTemplate) {
 	        RedisCacheManager rcm = new RedisCacheManager(redisTemplate);
 	        //设置缓存过期时间
-	      //  rcm.setDefaultExpiration(60);//秒，便于测试
+	        rcm.setDefaultExpiration(60);//秒，便于测试
 	        return rcm;
 	    }
 	    

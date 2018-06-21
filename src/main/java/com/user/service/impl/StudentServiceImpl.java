@@ -12,11 +12,17 @@ import com.user.service.StudentService;
 public class StudentServiceImpl implements StudentService {
 
 	@Autowired private StudentMapper studentMapper;
-	
 	@Override
 	public Student selectByPrimaryKey(String id) {
 		Student student = studentMapper.selectByPrimaryKey(id);
 		return student;
+	}
+	
+	@Transactional(readOnly = false)
+	@Override
+	public Student insert(Student student) {
+		studentMapper.insert(student);
+		return  student;
 	}
 
 }
